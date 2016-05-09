@@ -23,6 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Import `default` as the default settings. This can be handy while pushing items into tuples.
 import django.conf.global_settings as default
 
+FORCE_SCRIPT_NAME = '/wikilegis'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -31,10 +32,9 @@ import django.conf.global_settings as default
 SECRET_KEY = 'g8#!8*0sr!zsg!q=on=n66dtie69u0z1qhfk-&c8bc_%t#&g@%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2']
 
 # Application definition
 
@@ -76,12 +76,14 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'wikilegis.auth2.middlewares.WikilegisRemoteUser',
 )
+
+SESSION_COOKIE_NAME = "wikilegis_session"
 
 ROOT_URLCONF = 'wikilegis.urls'
 
@@ -136,10 +138,10 @@ LOCALE_PATHS = [
 AUTH_USER_MODEL = 'auth2.User'
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.facebook.Facebook2OAuth2',
-    'rules.permissions.ObjectPermissionBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    # 'social.backends.google.GoogleOAuth2',
+    # 'social.backends.facebook.Facebook2OAuth2',
+    # 'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
 )
 
 # If `False` the registration view will not require user activation through e-mail.
@@ -238,7 +240,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/wikilegis/static/'
 
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'public', 'static'))
 
