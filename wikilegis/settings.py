@@ -35,9 +35,8 @@ API_KEY = config('API_KEY', default='9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
-ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2']
+DEBUG = config('DEBUG', default=True)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=['*'])
 
 
 # Application definition
@@ -152,9 +151,6 @@ LOCALE_PATHS = [
 AUTH_USER_MODEL = 'auth2.User'
 
 AUTHENTICATION_BACKENDS = (
-    # 'social.backends.google.GoogleOAuth2',
-    # 'social.backends.facebook.Facebook2OAuth2',
-    # 'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.RemoteUserBackend',
 )
 
