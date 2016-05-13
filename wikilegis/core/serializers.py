@@ -1,6 +1,5 @@
 from django_comments.models import Comment
 from rest_framework import serializers
-
 from wikilegis.auth2.models import User
 from wikilegis.core.models import Bill, BillSegment, TypeSegment
 
@@ -11,13 +10,6 @@ class SegmentSerializer(serializers.ModelSerializer):
         model = BillSegment
         fields = ('id', 'bill', 'original', 'replaced', 'parent',
                   'type', 'number', 'content')
-
-
-class BillSegmentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = BillSegment
-        fields = ('id', 'parent', 'type', 'number', 'content')
 
 
 class BillSerializer(serializers.ModelSerializer):
