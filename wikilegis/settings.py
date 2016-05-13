@@ -32,6 +32,7 @@ FORCE_SCRIPT_NAME = '/wikilegis'
 SECRET_KEY = 'g8#!8*0sr!zsg!q=on=n66dtie69u0z1qhfk-&c8bc_%t#&g@%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2']
@@ -68,7 +69,17 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'easy_thumbnails',
     'image_cropping',
+    'rest_framework',
 )
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+         'rest_framework.permissions.AllowAny',
+    ],
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
