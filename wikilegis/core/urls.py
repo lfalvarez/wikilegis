@@ -43,11 +43,5 @@ urlpatterns += [
     url(r'^api/user/update/$', UserUpdateAPI.as_view(),
         name='user_update_api'),
     url(r'^api/users/$', UserAPI.as_view(),
-        name='user_update_api'),
-]
-
-urlpatterns += [
-    url(r'^api/bills/$', BillListAPI.as_view(), name='bill_list_api'),
-    url(r'^api/segments/$', SegmentsListAPI.as_view(), name='segments_list_api'),
-    url(r'^api/comments/$', CommentListAPI.as_view(), name='comment_list_api'),
+        name='user_api'),
 ]
