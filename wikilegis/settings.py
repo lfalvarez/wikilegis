@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Import `default` as the default settings. This can be handy while pushing items into tuples.
 import django.conf.global_settings as default
 
-FORCE_SCRIPT_NAME = '/wikilegis'
+FORCE_SCRIPT_NAME = config('FORCE_SCRIPT_NAME', default="/")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -35,7 +35,7 @@ API_KEY = config('API_KEY', default='9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = config('DEBUG', default=True)
+DEBUG = config('DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=['*'])
 
 # Application definition
