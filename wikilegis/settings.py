@@ -33,11 +33,8 @@ SECRET_KEY = 'g8#!8*0sr!zsg!q=on=n66dtie69u0z1qhfk-&c8bc_%t#&g@%'
 
 API_KEY = config('API_KEY', default='9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-
 DEBUG = config('DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=['*'])
-
 
 # Application definition
 
@@ -78,7 +75,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-         'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny',
     ],
     'PAGE_SIZE': 10
 }
