@@ -24,13 +24,39 @@ class TokenPermission(permissions.BasePermission):
 
 
 class BillListAPI(generics.ListAPIView):
-    queryset = Bill.objects.exclude(status='draft').order_by('-created')
+    queryset = Bill.objects.order_by('-created')
     serializer_class = BillSerializer
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        if request.GET.get('api_key') != settings.API_KEY:
+            queryset = queryset.exclude(status='draft')
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class SegmentsListAPI(generics.ListAPIView):
-    queryset = BillSegment.objects.exclude(bill__status='draft').order_by('-created')
+    queryset = BillSegment.objects.order_by('-created')
     serializer_class = SegmentSerializer
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        if request.GET.get('api_key') != settings.API_KEY:
+            queryset = queryset.exclude(bill__status='draft')
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class CommentListAPI(generics.ListAPIView):
