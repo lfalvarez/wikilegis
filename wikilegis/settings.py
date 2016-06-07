@@ -148,7 +148,7 @@ LOCALE_PATHS = [
 AUTH_USER_MODEL = 'auth2.User'
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.RemoteUserBackend',
+    'wikilegis.auth2.backends.WikielgisAuthBackend',
 )
 
 # If `False` the registration view will not require user activation through e-mail.
